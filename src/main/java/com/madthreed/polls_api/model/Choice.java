@@ -1,9 +1,6 @@
 package com.madthreed.polls_api.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -19,8 +16,8 @@ public class Choice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "choice")
-    private String choice;
+    @Column(name = "text")
+    private String text;
 
 
     @ManyToOne

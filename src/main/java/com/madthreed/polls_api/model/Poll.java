@@ -1,9 +1,6 @@
 package com.madthreed.polls_api.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -29,8 +26,8 @@ public class Poll {
 
 
     @DateTimeFormat
-    @Column(name = "start_date")
-    private Date start_date;
+    @Column(name = "creation_date")
+    private Date creation_date;
 
 
     @DateTimeFormat
