@@ -9,7 +9,7 @@ import java.util.List;
 public class PollResponse {
 
     private Long id;
-    private String question;
+    private String name;
     private String description;
     private Date creation_date;
     private Date expiration_date;
