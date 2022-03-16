@@ -19,8 +19,8 @@ public class Choice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "choice")
-    private String choice;
+    @Column(name = "text")
+    private String text;
 
 
     @ManyToOne

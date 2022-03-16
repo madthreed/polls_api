@@ -29,8 +29,8 @@ public class Poll {
 
 
     @DateTimeFormat
-    @Column(name = "start_date")
-    private Date start_date;
+    @Column(name = "creation_date")
+    private Date creation_date;
 
 
     @DateTimeFormat
