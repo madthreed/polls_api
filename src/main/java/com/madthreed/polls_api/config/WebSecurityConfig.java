@@ -15,6 +15,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+
+/**
+ * BASIC AUTH with credentials - username: user, password: 1
+ *
+ * Should make some other auth when all basic functionality become works fine
+ */
+
 @Configuration
 @EnableWebSecurity
 @ComponentScan
