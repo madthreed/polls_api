@@ -1,5 +1,6 @@
 package com.madthreed.polls_api.controller;
 
+import com.madthreed.polls_api.dto.PollResponse;
 import com.madthreed.polls_api.dto.QuestionRequest;
 import com.madthreed.polls_api.dto.QuestionResponse;
 import com.madthreed.polls_api.service.QuestionService;
@@ -24,7 +25,7 @@ public class QuestionsController {
 
 
     @GetMapping("/{pollId}")
-    @PreAuthorize("hasRole('USER')")
+//    @PreAuthorize("hasRole('USER')")
     public List<QuestionResponse> getQuestionsByPollId(@PathVariable Long pollId) {
 
         return questionService.getQuestionsByPollId(pollId);
@@ -32,18 +33,18 @@ public class QuestionsController {
 
 
     @PostMapping("/{pollId}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<QuestionResponse> createQuestionByPollId(
+//    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<PollResponse> createQuestionByPollId(
             @PathVariable Long pollId,
             @Valid @RequestBody QuestionRequest questionRequest) {
 
-        QuestionResponse questionResponse= questionService.createQuestionByPollId(pollId, questionRequest);
-        return ResponseEntity.ok(questionResponse);
+        PollResponse pollResponse= questionService.createQuestionByPollId(pollId, questionRequest);
+        return ResponseEntity.ok(pollResponse);
     }
 
 
     @PutMapping("/{pollId}/question/{questionId}")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<QuestionResponse> updateQuestionByPollAndQuestionId(
             @PathVariable Long pollId, @PathVariable Long questionId,
             @Valid @RequestBody QuestionRequest questionRequest) {
@@ -54,7 +55,7 @@ public class QuestionsController {
 
 
     @DeleteMapping("/{pollId}/question/{questionId}")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteQuestionByPollAndQuestionId(
             @PathVariable Long pollId, @PathVariable Long questionId) {
 

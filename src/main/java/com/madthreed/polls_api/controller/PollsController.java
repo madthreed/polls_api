@@ -2,7 +2,6 @@ package com.madthreed.polls_api.controller;
 
 import com.madthreed.polls_api.dto.PollRequest;
 import com.madthreed.polls_api.dto.PollResponse;
-import com.madthreed.polls_api.model.Poll;
 import com.madthreed.polls_api.service.PollService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,7 @@ public class PollsController {
 
 
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
+//    @PreAuthorize("hasRole('USER')")
     public List<PollResponse> getActivePolls() {
 
         return pollService.getActivePolls();
@@ -33,7 +32,7 @@ public class PollsController {
 
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<PollResponse> createPoll(@Valid @RequestBody PollRequest pollRequest) {
 
         PollResponse pollResponse= pollService.createPoll(pollRequest);
@@ -42,7 +41,7 @@ public class PollsController {
 
 
     @PutMapping("/{pollId}")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<PollResponse> updatePoll(@PathVariable Long pollId, @Valid @RequestBody PollRequest pollRequest) {
 
         PollResponse pollResponse = pollService.updatePoll(pollId, pollRequest);
@@ -51,7 +50,7 @@ public class PollsController {
 
 
     @DeleteMapping("/{pollId}")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deletePoll(@PathVariable Long pollId) {
         pollService.deletePoll(pollId);
 
