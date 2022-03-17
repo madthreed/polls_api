@@ -6,6 +6,7 @@ import com.madthreed.polls_api.exceptions.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -28,6 +29,14 @@ public class ErrorController {
     public ResponseEntity<String> handle_BAD_REQUEST(BadRequestException exception, HttpServletRequest request) {
         log.error("BAD_REQUEST", exception);
         return new ResponseEntity<>("You gave an incorrect values", HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseEntity<String> handle_BAD_REQUEST(AccessDeniedException exception, HttpServletRequest request) {
+        log.error("FORBIDDEN", exception);
+        return new ResponseEntity<>("Access denied", HttpStatus.FORBIDDEN);
     }
 
 

@@ -46,19 +46,21 @@ public class PollServiceImpl implements PollService {
     }
 
     @Override
-    public PollResponse updatePoll(Long id, PollRequest pollRequest) {
-        Poll poll = pollRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Poll", "poll_id", id));
+    public PollResponse updatePoll(Long pollId, PollRequest pollRequest) {
+        Poll poll = pollRepo.findById(pollId).orElseThrow(() -> new ResourceNotFoundException("Poll", "poll_id", pollId));
 
         poll.setName(pollRequest.getName());
         poll.setDescription(pollRequest.getDescription());
         poll.setExpiration_date(pollRequest.getExpiration_date());
 
-        return PollMapper.mapPollToPollResponse(poll);
+        Poll saved = pollRepo.save(poll);
+
+        return PollMapper.mapPollToPollResponse(saved);
     }
 
     @Override
-    public void deletePoll(Long id) {
-        Poll poll = pollRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Poll", "poll_id", id));
+    public void deletePoll(Long pollId) {
+        Poll poll = pollRepo.findById(pollId).orElseThrow(() -> new ResourceNotFoundException("Poll", "poll_id", pollId));
 
         pollRepo.delete(poll);
     }
