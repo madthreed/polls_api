@@ -2,13 +2,17 @@ package com.madthreed.polls_api.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class ChoiceResponse {
+public class ChoiceRequest {
 
-    private Long id;
+    @NotNull
+    @Size(max=100)
     private String text;
 }

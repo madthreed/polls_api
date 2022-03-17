@@ -1,6 +1,7 @@
 package com.madthreed.polls_api.util;
 
 import com.madthreed.polls_api.dto.ChoiceResponse;
+import com.madthreed.polls_api.dto.PollRequest;
 import com.madthreed.polls_api.dto.PollResponse;
 import com.madthreed.polls_api.dto.QuestionResponse;
 import com.madthreed.polls_api.model.Poll;
@@ -9,12 +10,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DtoMapper {
+public class PollMapper {
 
+    //todo REFACTOR THIS TO QUESTION AND CHOICE MAPPERS
     public static PollResponse mapPollToPollResponse(Poll poll) {
 
         Date now = new Date();
-
         List<QuestionResponse> questionResponses = poll.getQuestions()
                 .stream()
                 .map(question -> QuestionResponse
@@ -46,4 +47,19 @@ public class DtoMapper {
 
         return pollResponse;
     }
+
+
+    public static Poll mapPollRequestToPoll(PollRequest pollRequest) {
+        Poll poll = new Poll();
+        poll.setName(pollRequest.getName());
+        poll.setDescription(pollRequest.getDescription());
+        poll.setCreation_date(pollRequest.getCreation_date());
+        poll.setExpiration_date(pollRequest.getExpiration_date());
+        pollRequest.getQuestions().forEach(questionRequest ->
+                poll.addQuestion(QuestionMapper.mapQuestionRequestToQuestion(questionRequest)));
+
+        return poll;
+    }
+
+    //TODO IF YOU SEE THIS THEN THE BEST REGARDS FROM ME. (madThreeD)
 }

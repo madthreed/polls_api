@@ -1,18 +1,15 @@
 package com.madthreed.polls_api.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Table(name = "questions")
@@ -32,7 +29,7 @@ public class Question {
     private QuestionType questionType;
 
 
-    @OneToMany(mappedBy = "choice",
+    @OneToMany(mappedBy = "question",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true)

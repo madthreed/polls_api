@@ -1,18 +1,21 @@
 package com.madthreed.polls_api.service;
 
+import com.madthreed.polls_api.dto.PollRequest;
 import com.madthreed.polls_api.dto.PollResponse;
+import com.madthreed.polls_api.exceptions.ResourceNotFoundException;
 import com.madthreed.polls_api.model.Poll;
 import com.madthreed.polls_api.repo.PollRepo;
 import com.madthreed.polls_api.repo.UserRepo;
 import com.madthreed.polls_api.repo.VoteRepo;
-import com.madthreed.polls_api.util.DtoMapper;
+import com.madthreed.polls_api.util.PollMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
+@Service
 public class PollServiceImpl implements PollService {
     private final PollRepo pollRepo;
     private final UserRepo userRepo;
@@ -29,10 +32,36 @@ public class PollServiceImpl implements PollService {
 
         List<Poll> polls = pollRepo.findAll();
 
-        List<PollResponse> activePolls = polls.stream()
-                .map(DtoMapper::mapPollToPollResponse)
+        return polls.stream()
+                .map(PollMapper::mapPollToPollResponse)
                 .collect(Collectors.toList());
-
-        return activePolls;
     }
+
+    @Override
+    public PollResponse createPoll(PollRequest pollRequest) {
+        Poll poll = PollMapper.mapPollRequestToPoll(pollRequest);
+        Poll saved = pollRepo.save(poll);
+
+        return PollMapper.mapPollToPollResponse(saved);
+    }
+
+    @Override
+    public PollResponse updatePoll(Long id, PollRequest pollRequest) {
+        Poll poll = pollRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Poll", "poll_id", id));
+
+        poll.setName(pollRequest.getName());
+        poll.setDescription(pollRequest.getDescription());
+        poll.setExpiration_date(pollRequest.getExpiration_date());
+
+        return PollMapper.mapPollToPollResponse(poll);
+    }
+
+    @Override
+    public void deletePoll(Long id) {
+        Poll poll = pollRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Poll", "poll_id", id));
+
+        pollRepo.delete(poll);
+    }
+
+
 }

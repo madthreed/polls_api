@@ -1,13 +1,15 @@
 package com.madthreed.polls_api.dto;
 
 import com.madthreed.polls_api.model.QuestionType;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Builder
-@Data
+@AllArgsConstructor
+@RequiredArgsConstructor
+@Getter
+@Setter
 public class QuestionResponse {
 
     private Long id;

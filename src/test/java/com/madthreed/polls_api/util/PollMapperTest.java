@@ -7,8 +7,6 @@ import com.madthreed.polls_api.model.Choice;
 import com.madthreed.polls_api.model.Poll;
 import com.madthreed.polls_api.model.Question;
 import com.madthreed.polls_api.model.QuestionType;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -16,7 +14,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class DtoMapperTest {
+class PollMapperTest {
 
     @Test
     void mapPollToPollResponseTest() {
@@ -61,7 +59,7 @@ class DtoMapperTest {
                 .questions(List.of(questionResponse))
                 .build();
 
-        PollResponse actualPollResponse = DtoMapper.mapPollToPollResponse(poll);
+        PollResponse actualPollResponse = PollMapper.mapPollToPollResponse(poll);
 
         assertEquals(expectedPollResponse, actualPollResponse);
     }

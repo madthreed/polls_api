@@ -1,0 +1,28 @@
+#spring:
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:test_mem
+#    username: sa
+#    password:
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+#    generate-ddl: true
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.H2Dialect
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/polls_api_db
+#    password:
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
+    show-sql: true
+#  liquibase:
+#    enabled: false
+
