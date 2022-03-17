@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 @RequiredArgsConstructor
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 public class ChoiceRequest {
 
     @NotNull

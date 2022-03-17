@@ -7,6 +7,8 @@ import lombok.*;
 @RequiredArgsConstructor
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 public class ChoiceResponse {
 
     private Long id;

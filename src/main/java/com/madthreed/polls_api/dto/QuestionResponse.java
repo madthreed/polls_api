@@ -10,6 +10,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
+
 public class QuestionResponse {
 
     private Long id;

@@ -14,6 +14,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 public class PollRequest {
 
     @NotBlank

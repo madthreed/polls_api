@@ -10,6 +10,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 public class PollResponse {
 
     private Long id;
