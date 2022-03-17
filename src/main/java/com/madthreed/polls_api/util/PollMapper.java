@@ -61,5 +61,5 @@ public class PollMapper {
         return poll;
     }
 
-    //TODO IF YOU SEE THIS THEN THE BEST REGARDS FROM ME. (madThreeD)
+    //TODO IF YOU SEE THIS THEN YOU HAVE BEST REGARDS FROM ME. (madThreeD) ))))) o_O
 }
