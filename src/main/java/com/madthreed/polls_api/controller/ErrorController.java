@@ -20,14 +20,14 @@ public class ErrorController {
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<String> handle_NOT_FOUND(ResourceNotFoundException exception, HttpServletRequest request) {
-        log.error("NOT_FOUND", exception);
+        log.info("NOT_FOUND", exception);
         return new ResponseEntity<>("Entity not found", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handle_BAD_REQUEST(BadRequestException exception, HttpServletRequest request) {
-        log.error("BAD_REQUEST", exception);
+        log.info("BAD_REQUEST", exception);
         return new ResponseEntity<>("You gave an incorrect values", HttpStatus.BAD_REQUEST);
     }
 
@@ -35,7 +35,7 @@ public class ErrorController {
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResponseEntity<String> handle_BAD_REQUEST(AccessDeniedException exception, HttpServletRequest request) {
-        log.error("FORBIDDEN", exception);
+        log.info("FORBIDDEN", exception);
         return new ResponseEntity<>("Access denied", HttpStatus.FORBIDDEN);
     }
 

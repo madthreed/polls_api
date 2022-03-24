@@ -24,7 +24,6 @@ public class PollsController {
 
 
     @GetMapping
-//    @PreAuthorize("hasRole('USER')")
     public List<PollResponse> getActivePolls() {
 
         return pollService.getActivePolls();

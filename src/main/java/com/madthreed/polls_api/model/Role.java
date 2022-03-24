@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -13,13 +14,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "roles")
-public class Role {
+public class Role extends BaseEntity {
+    @Column(name = "name")
+    private String name;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-
-    @Enumerated(EnumType.STRING)
-    private RoleName role;
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private List<User> users;
 }

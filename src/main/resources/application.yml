@@ -29,3 +29,15 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+polls_api:
+  version:
+  endpoints:
+    auth:
+    polls:
+    questions:
+
+jwt:
+  token:
+    secret: madthreed_jwt_test
+    expired: 1800000

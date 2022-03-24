@@ -1,4 +1,4 @@
-package com.madthreed.polls_api.service;
+package com.madthreed.polls_api.service.impl;
 
 import com.madthreed.polls_api.dto.PollResponse;
 import com.madthreed.polls_api.dto.QuestionRequest;
@@ -8,6 +8,7 @@ import com.madthreed.polls_api.model.Poll;
 import com.madthreed.polls_api.model.Question;
 import com.madthreed.polls_api.repo.PollRepo;
 import com.madthreed.polls_api.repo.QuestionRepo;
+import com.madthreed.polls_api.service.QuestionService;
 import com.madthreed.polls_api.util.PollMapper;
 import com.madthreed.polls_api.util.QuestionMapper;
 import org.springframework.stereotype.Service;

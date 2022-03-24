@@ -11,12 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "votes")
-public class Vote {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Vote extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "poll_id", nullable = false)

@@ -13,12 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "questions")
-public class Question {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Question extends BaseEntity{
 
     @Column(name = "question")
     private String question;

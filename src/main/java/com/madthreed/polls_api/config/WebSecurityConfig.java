@@ -3,60 +3,51 @@ package com.madthreed.polls_api.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
-
-/**
- * BASIC AUTH with credentials - username: user, password: 1
- *
- * Should make some other auth when all basic functionality become works fine
- */
 
 @Configuration
 @EnableWebSecurity
 @ComponentScan
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    private final JwtConfigurer jwtConfigurer;
+
+    public WebSecurityConfig(JwtConfigurer jwtConfigurer) {
+        this.jwtConfigurer = jwtConfigurer;
+    }
+
+//    private final JwtTokenProvider jwtTokenProvider;
+//
+//    public WebSecurityConfig(JwtTokenProvider jwtTokenProvider) {
+//        this.jwtTokenProvider = jwtTokenProvider;
+//    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .cors().disable()
+                .httpBasic().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated();
-    }
-
-    @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService())
-                .passwordEncoder(encoder());
-    }
-
-    @Bean
-    protected UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.builder()
-                        .username("user")
-                        .password("{bcrypt}$2a$12$QdfMxC0vDIektvI0BXWYDuYkSsy79IFrAAGQsK2oQfR0uqoBpnfmS")
-                        .roles("ADMIN", "USER")
-                        .build();
-
-        return new InMemoryUserDetailsManager(user);
+                .antMatchers(HttpMethod.GET, "/api/polls").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/auth").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/polls").hasRole("USER")
+                .anyRequest().authenticated()
+                .and()
+                .apply(jwtConfigurer);
     }
 }

@@ -10,15 +10,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "choices")
-public class Choice {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Choice extends BaseEntity{
 
     @Column(name = "text")
     private String text;
-
 
     @ManyToOne
     @JoinColumn(name = "question_id")
